@@ -1,54 +1,35 @@
-# React + TypeScript + Vite
+# Hiring task
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Create an app, that has a login-like screen containing 1 input field for username and a Login button. On clicking the Login button, call the provided checkUsername function. If the provided username is valid, checkUsername will return an email address. Handle returned errors. After successful login, show a new screen with the returned email address.
 
-Currently, two official plugins are available:
+# Requirements
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- use React function components
+- use Material-UI
+- use provided `checkUsername` function
+- use state handling (e.g. no email address as url argument)
 
-## Expanding the ESLint configuration
+# checkUsername function
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+```javascript
+export async function checkUsername(username) {
+  // simulate API response delay
+  await new Promise((res) => setTimeout(res, 100))
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+  if (RegExp(/^[a-z-_.]+$/i).test(username) === false) {
+    return {
+      error: 'InvalidFormat',
+      data: "username can only consist of characters a-z, A-Z, '-', '_' and '.'",
+    }
+  }
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+  if (['admin', 'null', 'root'].includes(username)) {
+    return { error: 'AlreadyExists', data: 'this username is already taken' }
+  }
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+  return {
+    error: null,
+    data: `${username.toLowerCase()}fidoo.com`,
+  }
+}
 ```
