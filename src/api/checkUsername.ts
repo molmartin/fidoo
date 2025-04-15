@@ -26,5 +26,22 @@ async function checkUsername(username: string): Promise<CheckUsernameResult> {
     data: `${username.toLowerCase()}@fidoo.com`,
   }
 }
-export default checkUsername
+
+async function checkUsernameWithErrorHandling(
+  username: string,
+): Promise<CheckUsernameResult> {
+  try {
+    const response = await checkUsername(username)
+    if (response.error) {
+      throw new Error(response.data)
+    }
+    return response
+  } catch (error) {
+    throw new Error(
+      error instanceof Error ? error.message : 'An error occurred',
+    )
+  }
+}
+
+export default checkUsernameWithErrorHandling
 export type { CheckUsernameResult }
