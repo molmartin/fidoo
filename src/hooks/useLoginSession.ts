@@ -1,3 +1,5 @@
+import { useCallback } from 'react'
+
 function useLoginSession() {
   const sessionKey = 'email'
 
@@ -9,9 +11,9 @@ function useLoginSession() {
     localStorage.setItem(sessionKey, email)
   }
 
-  function removeSession() {
+  const removeSession = useCallback(() => {
     localStorage.removeItem(sessionKey)
-  }
+  }, [])
 
   return {
     getSession,

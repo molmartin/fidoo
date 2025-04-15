@@ -2,7 +2,6 @@ type CheckUsernameResult =
   | { error: null; data: string }
   | { error: string; data: string }
 
-// TODO test
 async function checkUsername(username: string): Promise<CheckUsernameResult> {
   // simulace prodlevy API odpovědi
   await new Promise((res) => setTimeout(res, 100))
