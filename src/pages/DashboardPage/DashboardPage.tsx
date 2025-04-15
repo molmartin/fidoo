@@ -1,16 +1,15 @@
 import { useNavigate } from 'react-router-dom'
 import { Box, Button, Container, Typography } from '@mui/material'
+import useLoginSession from '../../hooks/useLoginSession'
 
-interface DashboardProps {
-  email: string
-  setEmail: (email: string) => void
-}
-
-function Dashboard({ email, setEmail }: DashboardProps) {
+function Dashboard() {
   const navigate = useNavigate()
+  const { removeSession } = useLoginSession()
 
-  function handleLogout(): void {
-    setEmail('')
+  const email = localStorage.getItem('email')
+
+  function handleLogout() {
+    removeSession()
     navigate('/')
   }
 

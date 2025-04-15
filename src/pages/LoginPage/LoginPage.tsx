@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
 import {
   Box,
   Button,
@@ -8,28 +8,42 @@ import {
   Typography,
   Alert,
   CircularProgress,
+  Snackbar,
 } from '@mui/material'
 import useLogin from './hooks/useLogin'
+import useLoginSession from '../../hooks/useLoginSession'
 
-interface LoginPageProps {
-  setEmail: (email: string) => void
-}
-
-function LoginPage(props: LoginPageProps) {
+function LoginPage() {
   const [username, setUsername] = useState('')
   const navigate = useNavigate()
   const { mutate: login, isError, error, isPending } = useLogin()
+  const { setSession } = useLoginSession()
+
+  const location = useLocation()
+  const wasKicked = location.state?.fromProtected === true
+
+  const [snackbarOpen, setSnackbarOpen] = useState(false)
+
+  function handleClose(): void {
+    setSnackbarOpen(false)
+  }
 
   function handleLogin(): void {
     login(username, {
       onSuccess: (response) => {
         if (!response.error) {
-          props.setEmail(response.data)
+          setSession(response.data)
           navigate('/dashboard')
         }
       },
     })
   }
+
+  useEffect(() => {
+    if (wasKicked) {
+      setSnackbarOpen(true)
+    }
+  }, [wasKicked])
 
   return (
     <Container maxWidth="sm">
@@ -63,6 +77,12 @@ function LoginPage(props: LoginPageProps) {
           {isPending ? <CircularProgress size={24} color="inherit" /> : 'Login'}
         </Button>
       </Box>
+      <Snackbar
+        open={snackbarOpen}
+        autoHideDuration={3000}
+        onClose={handleClose}
+        message="You have been logged out"
+      />
     </Container>
   )
 }
