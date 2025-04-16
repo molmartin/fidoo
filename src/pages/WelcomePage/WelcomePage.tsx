@@ -1,11 +1,16 @@
-import { Link as RouterLink } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { Box, Link, Container, Typography, Fade } from '@mui/material'
 import { useEffect, useState } from 'react'
-function Dashboard() {
+import useLoginSession from '../../hooks/useLoginSession'
+
+function WelcomePage() {
   const email = localStorage.getItem('email')
   const [showBridge, setShowBridge] = useState(false)
   const [showSecond, setShowSecond] = useState(false)
   const [showLogout, setShowLogout] = useState(false)
+
+  const { removeSession } = useLoginSession()
+  const navigate = useNavigate()
 
   //TODO refactor
   useEffect(() => {
@@ -23,6 +28,12 @@ function Dashboard() {
 
     return () => clearTimeout(timeout)
   }, [])
+
+  function handleLogout() {
+    removeSession()
+    navigate('/')
+  }
+
   return (
     <Container maxWidth="md">
       <Box
@@ -38,15 +49,23 @@ function Dashboard() {
           <Fade in={showBridge} timeout={2000}>
             <span>, you are logged in.</span>
           </Fade>
+          <br />
           <Fade in={showSecond} timeout={2000}>
-            <span>
-              <br />
-              Do you want to{' '}
-            </span>
+            <span>Do you want to </span>
           </Fade>
           <Fade in={showLogout} timeout={2000}>
             <span>
-              <RouterLink to="/">logout</RouterLink>?
+              <span>
+                <Link
+                  component="button"
+                  onClick={handleLogout}
+                  underline="always"
+                  sx={{ color: 'primary.main', cursor: 'pointer' }}
+                >
+                  logout
+                </Link>
+                ?
+              </span>
             </span>
           </Fade>
         </Typography>
@@ -55,4 +74,4 @@ function Dashboard() {
   )
 }
 
-export default Dashboard
+export default WelcomePage

@@ -15,7 +15,7 @@ function LoginPage() {
   const [username, setUsername] = useState('')
   const navigate = useNavigate()
   const { mutate: login, isError, error, isPending } = useLogin()
-  const { setSession, removeSession } = useLoginSession()
+  const { setSession } = useLoginSession()
 
   const location = useLocation()
   const wasKicked = location.state?.fromProtected === true
@@ -38,7 +38,6 @@ function LoginPage() {
     })
   }
   useEffect(() => {
-    removeSession()
     if (wasKicked) {
       setSnackbarOpen(true)
     }

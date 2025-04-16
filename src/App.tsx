@@ -4,7 +4,7 @@ import '@fontsource/roboto/500.css'
 import '@fontsource/roboto/700.css'
 import { HashRouter, Route, Routes } from 'react-router-dom'
 import LoginPage from './pages/LoginPage'
-import DashboardPage from './pages/DashboardPage'
+import WelcomePage from './pages/WelcomePage'
 import ProtectedRoute from './components/ProtectedRoute'
 import './App.css'
 
@@ -14,7 +14,7 @@ function App() {
       <Routes>
         <Route path="/" element={<LoginPage />} />
         <Route element={<ProtectedRoute />}>
-          <Route path="/dashboard" element={<DashboardPage />} />
+          <Route path="/dashboard" element={<WelcomePage />} />
         </Route>
       </Routes>
     </HashRouter>
