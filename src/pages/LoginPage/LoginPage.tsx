@@ -26,7 +26,8 @@ function LoginPage() {
     setSnackbarOpen(false)
   }
 
-  function handleLogin(): void {
+  function handleLogin(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault()
     login(username, {
       onSuccess: (response) => {
         if (!response.error) {
