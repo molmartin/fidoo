@@ -37,6 +37,8 @@ function LoginPage() {
       },
     })
   }
+
+  //TODO nefunguje
   useEffect(() => {
     if (wasKicked) {
       setSnackbarOpen(true)
@@ -79,6 +81,7 @@ function LoginPage() {
         open={snackbarOpen}
         autoHideDuration={3000}
         onClose={handleClose}
+        color="info"
         message="You have been logged out"
       />
     </Container>

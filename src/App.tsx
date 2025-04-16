@@ -7,12 +7,15 @@ import LoginPage from './pages/LoginPage'
 import WelcomePage from './pages/WelcomePage'
 import ProtectedRoute from './components/ProtectedRoute'
 import './App.css'
+import LoginRoute from './components/LoginRoute'
 
 function App() {
   return (
     <HashRouter>
       <Routes>
-        <Route path="/" element={<LoginPage />} />
+        <Route element={<LoginRoute />}>
+          <Route path="/" element={<LoginPage />} />
+        </Route>
         <Route element={<ProtectedRoute />}>
           <Route path="/dashboard" element={<WelcomePage />} />
         </Route>
