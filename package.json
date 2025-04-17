@@ -8,8 +8,14 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
+    "type-check": "tsc --noEmit",
     "test": "vitest",
-    "test:ui": "vitest --ui"
+    "test:ui": "vitest --ui",
+    "test:e2e": "playwright test",
+    "test:e2e:headed": "playwright test --headed",
+    "test:e2e:ui": "playwright show-report",
+    "test:e2e:debug": "playwright test --debug",
+    "test:e2e:install": "playwright install --with-deps"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
@@ -24,6 +30,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.21.0",
+    "@playwright/test": "^1.51.1",
     "@types/node": "^22.14.1",
     "@types/react": "^19.0.10",
     "@types/react-dom": "^19.0.4",

@@ -60,6 +60,11 @@ function LoginPage() {
       >
         <TextField
           label="Type your username"
+          slotProps={{
+            htmlInput: {
+              'data-tid': 'input-username',
+            },
+          }}
           value={username}
           error={isError}
           helperText={isError && error instanceof Error ? error.message : ' '}

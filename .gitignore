@@ -6,6 +6,10 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
+# test outputs
+test-results/
+playwright-report/
+coverage/
 
 node_modules
 dist
