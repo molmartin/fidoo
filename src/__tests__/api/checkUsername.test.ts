@@ -10,7 +10,6 @@ describe('checkUsernameWithErrorHandling', () => {
     })
   })
 
-  // TODO : add test to input for username with special characters
   it('should return email for special char username', async () => {
     const res = await checkUsernameWithErrorHandling('.........')
     expect(res).toEqual({
