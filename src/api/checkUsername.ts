@@ -25,7 +25,7 @@ async function checkUsername(username: string): Promise<CheckUsernameResult> {
     data: `${username.toLowerCase()}@fidoo.com`,
   }
 }
-// TODO test, napsat poznamku o tom ze .......@fidoo.com take neni platna adresa, navrhnout lepsi regex
+
 async function checkUsernameWithErrorHandling(
   username: string,
 ): Promise<CheckUsernameResult> {
@@ -36,6 +36,7 @@ async function checkUsernameWithErrorHandling(
     }
     return response
   } catch (error) {
+    // this should never happen
     throw new Error(
       error instanceof Error ? error.message : 'An error occurred',
     )
