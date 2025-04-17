@@ -31,7 +31,7 @@ function WelcomePage() {
 
   function handleLogout() {
     removeSession()
-    navigate('/')
+    navigate('/', { state: { fromProtected: true } })
   }
 
   return (

@@ -38,14 +38,12 @@ function LoginPage() {
     })
   }
 
-  //TODO nefunguje
   useEffect(() => {
     if (wasKicked) {
       setSnackbarOpen(true)
+      navigate(location.pathname, { replace: true })
     }
-    //TODO: remove this when we have a better solution for kicking users out
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [wasKicked])
+  }, [wasKicked, location.pathname, navigate])
 
   return (
     <Container maxWidth="sm">
@@ -81,7 +79,6 @@ function LoginPage() {
         open={snackbarOpen}
         autoHideDuration={3000}
         onClose={handleClose}
-        color="info"
         message="You have been logged out"
       />
     </Container>
