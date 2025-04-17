@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { Container, Snackbar } from '@mui/material'
+import { Snackbar } from '@mui/material'
 import LoginForm from './components/LoginForm'
 
 function LoginPage() {
@@ -22,7 +22,7 @@ function LoginPage() {
   }
 
   return (
-    <Container maxWidth="sm">
+    <>
       <LoginForm onLoginSuccess={() => navigate('/welcome')} />
       <Snackbar
         open={snackbarOpen}
@@ -30,7 +30,7 @@ function LoginPage() {
         onClose={handleClose}
         message="You have been logged out"
       />
-    </Container>
+    </>
   )
 }
 

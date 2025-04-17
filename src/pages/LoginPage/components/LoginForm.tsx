@@ -38,9 +38,8 @@ function LoginForm({ onLoginSuccess }: LoginFormProps) {
       autoComplete="off"
       display="flex"
       flexDirection="column"
-      justifyContent="center"
-      height="100dvh"
       gap={2}
+      flex={1}
       onSubmit={handleLogin}
     >
       <TextField

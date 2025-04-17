@@ -8,7 +8,15 @@ import WelcomePage from './pages/WelcomePage'
 import ProtectedRoute from './components/ProtectedRoute'
 import './App.css'
 import LoginRoute from './components/LoginRoute'
-import { createTheme, CssBaseline, ThemeProvider } from '@mui/material'
+import {
+  Box,
+  Container,
+  createTheme,
+  CssBaseline,
+  ThemeProvider,
+  Typography,
+} from '@mui/material'
+import { version } from '../package.json'
 
 const darkTheme = createTheme({
   palette: {
@@ -20,18 +28,39 @@ function App() {
   return (
     <ThemeProvider theme={darkTheme}>
       <CssBaseline />
-      <main>
-        <HashRouter>
-          <Routes>
-            <Route element={<LoginRoute />}>
-              <Route path="/" element={<LoginPage />} />
-            </Route>
-            <Route element={<ProtectedRoute />}>
-              <Route path="/welcome" element={<WelcomePage />} />
-            </Route>
-          </Routes>
-        </HashRouter>
-      </main>
+      <Container
+        maxWidth="sm"
+        sx={{
+          minHeight: '100vh',
+          display: 'flex',
+          flexDirection: 'column',
+        }}
+      >
+        <Box
+          component="main"
+          sx={{
+            flexGrow: 1,
+            display: 'flex',
+            alignItems: 'center',
+          }}
+        >
+          <HashRouter>
+            <Routes>
+              <Route element={<LoginRoute />}>
+                <Route path="/" element={<LoginPage />} />
+              </Route>
+              <Route element={<ProtectedRoute />}>
+                <Route path="/welcome" element={<WelcomePage />} />
+              </Route>
+            </Routes>
+          </HashRouter>
+        </Box>
+        <Box component="footer" paddingY={2}>
+          <Typography variant="body2" color="textSecondary" align="center">
+            Version: {version}
+          </Typography>
+        </Box>
+      </Container>
     </ThemeProvider>
   )
 }

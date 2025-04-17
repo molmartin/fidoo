@@ -16,13 +16,12 @@ function WelcomePage() {
 
   return (
     <Container
-      maxWidth="md"
       sx={{
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
-        minHeight: '100vh',
+        minHeight: '100%',
         py: 0,
       }}
     >

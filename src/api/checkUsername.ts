@@ -19,7 +19,7 @@ async function checkUsername(username: string): Promise<CheckUsernameResult> {
       data: 'this username is already taken',
     }
   }
-
+  // corrected email format
   return {
     error: null,
     data: `${username.toLowerCase()}@fidoo.com`,

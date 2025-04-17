@@ -10,7 +10,7 @@ describe('checkUsernameWithErrorHandling', () => {
     })
   })
 
-  // I would personally update regex in the mock api to not allow this
+  // TODO : add test to input for username with special characters
   it('should return email for special char username', async () => {
     const res = await checkUsernameWithErrorHandling('.........')
     expect(res).toEqual({
