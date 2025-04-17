@@ -21,9 +21,9 @@ function WelcomeAnimation({ email, onLogout }: Props) {
 
   return (
     <Typography variant="body1" fontSize={20}>
-      Welcome <Link href={`mailto:${email}`}>{email}</Link>,{' '}
+      Welcome, <Link href={`mailto:${email}`}>{email}</Link>.{' '}
       <Fade in={step >= 1} timeout={2000}>
-        <span>you are logged in.</span>
+        <span>You are logged in.</span>
       </Fade>
       <br />
       <Fade in={step >= 2} timeout={2000}>
@@ -36,7 +36,7 @@ function WelcomeAnimation({ email, onLogout }: Props) {
             onClick={onLogout}
             sx={{ color: 'primary.main', cursor: 'pointer' }}
           >
-            logout
+            log out
           </Link>
           ?
         </span>
