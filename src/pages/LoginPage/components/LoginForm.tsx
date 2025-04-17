@@ -45,7 +45,6 @@ function LoginForm({ onLoginSuccess }: LoginFormProps) {
       <UsernameInput
         value={username}
         onChange={handleChange}
-        isError={isError}
         errorMessage={errorMessage}
       />
       <Button

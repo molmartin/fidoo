@@ -3,18 +3,12 @@ import { TextField } from '@mui/material'
 type UsernameInputProps = {
   value: string
   onChange: (newValue: string) => void
-  isError: boolean
   errorMessage: string
 }
 
 const MAX_USERNAME_LENGTH = 15
 
-function UsernameInput({
-  value,
-  onChange,
-  isError,
-  errorMessage,
-}: UsernameInputProps) {
+function UsernameInput({ value, onChange, errorMessage }: UsernameInputProps) {
   function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
     const newValue = event.target.value
     if (newValue.length <= MAX_USERNAME_LENGTH) {
@@ -22,7 +16,7 @@ function UsernameInput({
     }
   }
 
-  const helperText = isError
+  const helperText = errorMessage
     ? errorMessage
     : `${MAX_USERNAME_LENGTH - value.length} characters remaining`
 
@@ -36,7 +30,7 @@ function UsernameInput({
         },
       }}
       value={value}
-      error={isError}
+      error={!!errorMessage}
       helperText={helperText}
       onChange={handleChange}
     />

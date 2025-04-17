@@ -19,10 +19,7 @@ function WelcomePage() {
       sx={{
         display: 'flex',
         flexDirection: 'column',
-        justifyContent: 'center',
         alignItems: 'center',
-        minHeight: '100%',
-        py: 0,
       }}
     >
       <WelcomeAnimation email={email} onLogout={handleLogout} />
