@@ -1,12 +1,13 @@
 import { useState } from 'react'
-import { Box, Button, CircularProgress, TextField } from '@mui/material'
+import { Box, Button, CircularProgress } from '@mui/material'
 import useLogin from '../hooks/useLogin'
 import useLoginSession from '../../../hooks/useLoginSession'
+import UsernameInput from './UsernameInput'
 
 type LoginFormProps = {
   onLoginSuccess: () => void
 }
-const MAX_USERNAME_LENGTH = 15
+
 function LoginForm({ onLoginSuccess }: LoginFormProps) {
   const [username, setUsername] = useState('')
   const { mutate: login, reset, isError, error, isPending } = useLogin()
@@ -24,13 +25,12 @@ function LoginForm({ onLoginSuccess }: LoginFormProps) {
     })
   }
 
-  function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
-    const newValue: string = event.target.value
-    if (newValue.length <= MAX_USERNAME_LENGTH) {
-      if (isError) reset()
-      setUsername(newValue)
-    }
+  function handleChange(newValue: string) {
+    setUsername(newValue)
+    reset()
   }
+
+  const errorMessage = isError && error instanceof Error ? error.message : ''
 
   return (
     <Box
@@ -42,22 +42,11 @@ function LoginForm({ onLoginSuccess }: LoginFormProps) {
       flex={1}
       onSubmit={handleLogin}
     >
-      <TextField
-        label="Type your username"
-        slotProps={{
-          htmlInput: {
-            'data-tid': 'input-username',
-            maxLength: MAX_USERNAME_LENGTH,
-          },
-        }}
+      <UsernameInput
         value={username}
-        error={isError}
-        helperText={
-          isError && error instanceof Error
-            ? error.message
-            : `${MAX_USERNAME_LENGTH - username.length} characters remaining`
-        }
         onChange={handleChange}
+        isError={isError}
+        errorMessage={errorMessage}
       />
       <Button
         type="submit"
