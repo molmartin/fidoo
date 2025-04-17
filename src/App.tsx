@@ -17,7 +17,7 @@ function App() {
           <Route path="/" element={<LoginPage />} />
         </Route>
         <Route element={<ProtectedRoute />}>
-          <Route path="/dashboard" element={<WelcomePage />} />
+          <Route path="/welcome" element={<WelcomePage />} />
         </Route>
       </Routes>
     </HashRouter>

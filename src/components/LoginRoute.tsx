@@ -9,7 +9,7 @@ function LoginRoute(): JSX.Element {
   if (getSession()) {
     return (
       <Navigate
-        to="/dashboard"
+        to="/welcome"
         replace
         state={{ fromLogin: true, from: location.pathname }}
       />

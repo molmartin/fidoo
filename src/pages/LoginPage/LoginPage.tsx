@@ -32,7 +32,7 @@ function LoginPage() {
       onSuccess: (response) => {
         if (!response.error) {
           setSession(response.data)
-          navigate('/dashboard')
+          navigate('/welcome')
         }
       },
     })
