@@ -34,12 +34,16 @@ export async function checkUsername(username) {
 }
 ```
 
+# Live demo
+
+https://molmartin.github.io/fidoo/
+
 # 🔧 Project requirememnts
 
 - min screen size 320px
 - max input length 15
 - Node.js **22.x**
-- Yarn ve verzi **1.x** (`Classic`)
+- Yarn **1.x** (`Classic`)
 
 ## Instalation
 
