@@ -12,7 +12,7 @@ function WelcomePage() {
   const { removeSession } = useLoginSession()
   const navigate = useNavigate()
 
-  //TODO refactor
+  //TODO refactor, pridat zaskrtavatko, ze nechci animaci
   useEffect(() => {
     const timeout = setTimeout(() => {
       setShowBridge(true)

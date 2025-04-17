@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test'
 
-test('login flow', async ({ page }) => {
+test('login and logout flow', async ({ page }) => {
   await page.goto('/')
   await page.fill('input[data-tid="input-username"]', 'testuser')
   await page.click('button:has-text("Login")')
@@ -10,4 +10,12 @@ test('login flow', async ({ page }) => {
   await expect(
     page.locator('a', { hasText: 'testuser@fidoo.com' }),
   ).toBeVisible()
+
+  const logoutLink = page.locator('button:has-text("logout")')
+  await logoutLink.waitFor({ state: 'visible', timeout: 7000 })
+
+  //
+  await logoutLink.click()
+
+  await expect(page).toHaveURL('fidoo/#/')
 })
