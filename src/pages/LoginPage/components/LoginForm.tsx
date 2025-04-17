@@ -6,10 +6,10 @@ import useLoginSession from '../../../hooks/useLoginSession'
 type LoginFormProps = {
   onLoginSuccess: () => void
 }
-
+const MAX_USERNAME_LENGTH = 15
 function LoginForm({ onLoginSuccess }: LoginFormProps) {
   const [username, setUsername] = useState('')
-  const { mutate: login, isError, error, isPending } = useLogin()
+  const { mutate: login, reset, isError, error, isPending } = useLogin()
   const { setSession } = useLoginSession()
 
   function handleLogin(event: React.FormEvent<HTMLFormElement>) {
@@ -22,6 +22,14 @@ function LoginForm({ onLoginSuccess }: LoginFormProps) {
         }
       },
     })
+  }
+
+  function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
+    const newValue: string = event.target.value
+    if (newValue.length <= MAX_USERNAME_LENGTH) {
+      if (isError) reset()
+      setUsername(newValue)
+    }
   }
 
   return (
@@ -40,12 +48,17 @@ function LoginForm({ onLoginSuccess }: LoginFormProps) {
         slotProps={{
           htmlInput: {
             'data-tid': 'input-username',
+            maxLength: MAX_USERNAME_LENGTH,
           },
         }}
         value={username}
         error={isError}
-        helperText={isError && error instanceof Error ? error.message : ' '}
-        onChange={({ target }) => setUsername(target.value)}
+        helperText={
+          isError && error instanceof Error
+            ? error.message
+            : `${MAX_USERNAME_LENGTH - username.length} characters remaining`
+        }
+        onChange={handleChange}
       />
       <Button
         type="submit"
