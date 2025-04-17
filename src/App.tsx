@@ -8,19 +8,31 @@ import WelcomePage from './pages/WelcomePage'
 import ProtectedRoute from './components/ProtectedRoute'
 import './App.css'
 import LoginRoute from './components/LoginRoute'
+import { createTheme, CssBaseline, ThemeProvider } from '@mui/material'
+
+const darkTheme = createTheme({
+  palette: {
+    mode: 'dark',
+  },
+})
 
 function App() {
   return (
-    <HashRouter>
-      <Routes>
-        <Route element={<LoginRoute />}>
-          <Route path="/" element={<LoginPage />} />
-        </Route>
-        <Route element={<ProtectedRoute />}>
-          <Route path="/welcome" element={<WelcomePage />} />
-        </Route>
-      </Routes>
-    </HashRouter>
+    <ThemeProvider theme={darkTheme}>
+      <CssBaseline />
+      <main>
+        <HashRouter>
+          <Routes>
+            <Route element={<LoginRoute />}>
+              <Route path="/" element={<LoginPage />} />
+            </Route>
+            <Route element={<ProtectedRoute />}>
+              <Route path="/welcome" element={<WelcomePage />} />
+            </Route>
+          </Routes>
+        </HashRouter>
+      </main>
+    </ThemeProvider>
   )
 }
 

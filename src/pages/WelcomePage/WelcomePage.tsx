@@ -1,12 +1,10 @@
-import { useState } from 'react'
-import { Container, FormControlLabel, Checkbox } from '@mui/material'
+import { Container } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 import WelcomeAnimation from './components/WelcomeAnimation'
 import useLoginSession from '../../hooks/useLoginSession'
 
 function WelcomePage() {
   const email = localStorage.getItem('email')
-  const [disableAnimation, setDisableAnimation] = useState(false)
 
   const { removeSession } = useLoginSession()
   const navigate = useNavigate()
@@ -17,22 +15,18 @@ function WelcomePage() {
   }
 
   return (
-    <Container maxWidth="md">
-      <WelcomeAnimation
-        email={email}
-        disableAnimation={disableAnimation}
-        onLogout={handleLogout}
-      />
-
-      <FormControlLabel
-        control={
-          <Checkbox
-            checked={disableAnimation}
-            onChange={(e) => setDisableAnimation(e.target.checked)}
-          />
-        }
-        label="Skip animation"
-      />
+    <Container
+      maxWidth="md"
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        minHeight: '100vh',
+        py: 0,
+      }}
+    >
+      <WelcomeAnimation email={email} onLogout={handleLogout} />
     </Container>
   )
 }

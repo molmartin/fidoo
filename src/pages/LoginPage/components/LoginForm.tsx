@@ -32,7 +32,6 @@ function LoginForm({ onLoginSuccess }: LoginFormProps) {
       flexDirection="column"
       justifyContent="center"
       height="100dvh"
-      paddingX={6}
       gap={2}
       onSubmit={handleLogin}
     >
